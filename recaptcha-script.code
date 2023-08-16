@@ -1,0 +1,33 @@
+//Recaptcha - Server
+$ip = $_SERVER["REMOTE_ADDR"];
+$captcha = $_POST["g-recaptcha-response"];
+$cap_key = "{key-secret}";
+
+$url = 'https://www.google.com/recaptcha/api/siteverify';
+$data = ['secret' => $cap_key, 'response' => $captcha, 'remoteip' => $ip];
+$options = [
+    'http' => [
+        'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+        'method' => 'POST',
+        'content' => http_build_query($data),
+    ],
+];
+$context = stream_context_create($options);
+$result = file_get_contents($url, false, $context);
+if ($result === false) {
+    /* Handle error */
+}else{
+  $rst_captcha = json_decode($result, TRUE);
+  if($rst_captcha["success"])
+    print("validacion Recaptcha OK");
+  else
+    print("validacion Recaptcha MAL");
+}
+
+
+//Recaptcha - Front
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<label>Captcha:</label>
+<divc class="g-recaptcha" data-sitekey="{key-web}" /> 
+  
