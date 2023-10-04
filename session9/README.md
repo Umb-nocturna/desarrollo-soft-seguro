@@ -120,7 +120,7 @@
 
 #### CAP4: INTEGRANDO CSS Y JS
 
-0. Hacer el ajuste de las carpetas del proyecto. POr buenas practicas deben quedar como en **(Django - Folders Structur Guide Lines)** y entonces se debe ajustar la ruta del "templates" asi:
+0. Hacer el ajuste de las carpetas del proyecto. Por buenas practicas deben quedar como en **(Django - Folders Structure Guide Lines)** y entonces se debe ajustar la ruta del "templates" asi:
 
     ```
     "DIRS": [os.path.join(BASE_DIR, 'templates'),],
@@ -134,7 +134,7 @@
     STATIC_URL = '/static/'
     STATICFILES_DIRS = (os.path.join(BASE_DIR, '<miproyecto>/static'), )
     ```
-3. En cada template donde voy a haceruso de archivos estaticos, debo configurar la variable asi;
+3. En cada template donde voy a hacer uso de archivos estaticos, debo configurar la variable asi;
 
     ```
     {% load static %}
@@ -147,7 +147,28 @@
     <img class="profile-img" src="{% static 'assets/profile.png' %}" alt="..." />
     ```
 
-#### CAP5: PRIMER APP - PROYECTOS
+[[CHALLENGE]]: Incluir una hoja de css custom y una de js custom 
+
+
+5. Para efectos del ejercicio en clase. Vamos a integrar un template que existe en el mercado, basado en Boostrap. [Template Free proyecto](https://startbootstrap.com/theme/personal)
+
+6. Descargamos el template y vamos a explorar su codigo HTML.
+
+7. ...Waiting...
+
+8. Entendamos un poco [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+
+9. Algunos ejemplos: [Bootstrap-Examples](https://getbootstrap.com/docs/4.0/examples/)
+
+10. ...Waiting...
+
+11. Tomamos de ejemplo una de las paginas del "template". EJ:index.html
+
+12. Separamos sus componentes en: Header, Footer, Content.
+
+13. Y los cluimos en los bloques del "Template" que corresponda.
+
+#### CAP5: PRIMERA APP - PROYECTOS
 
 1. Vamos a crear un super usuario para acceder al administrador, asi:
 
@@ -164,7 +185,8 @@
     ```
     django-admin startapp <nombre-app>
     ```
-5. Aparecera dentro de nuestra carpeta "apps/<nueva-app>/" con los archivos de python.
+
+5. Aparecera dentro de nuestra carpeta "Aplicaciones/<nueva-app>/" con los archivos de python.
 
 6. Agregamos la nueva app al archivo de configuracion del proyecto, asi:
  
@@ -311,7 +333,7 @@ my_project/
 │   │   ├── resumen.html
 │   │   ├── proyectos.html
 │
-├── media/                      # Archivos subidos por el usuario (si se permite la carga de archivos).
+├── media/                      # Archivos subidos por el usuario (Si se necesita).
 │
 ├── .gitignore
 ├── README.md
