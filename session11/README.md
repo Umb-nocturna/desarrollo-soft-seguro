@@ -1,4 +1,4 @@
-## Version 2.2
+## Version 2.3
 
 ### CAP 1: Install Django
 
@@ -170,6 +170,7 @@
 
 13. Y los cluimos en los bloques del "Template" que corresponda.
 
+
 #### CAP5: PRIMERA APP - PROYECTOS
 
 1. Vamos a crear un super usuario para acceder al administrador, asi:
@@ -283,6 +284,53 @@ def proyectos(request):
 
 15. Ahora ajusto la plantilla "templates/proyecto.html" para que itere, y muestre los proyectos.
 
+```
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+    {% for p in proyectos %}
+
+        <p>{{p.date}}</p>
+        <h2 class="fw-bolder">{{p.nombre}}</h2>
+        <p>{{p.descripcion}}</p>
+        <hr>
+    
+    {% endfor %}
+
+{% endblock %}
+
+```
+
+16. Vamos a agregar al modelo 2 nuevos campos, que agregamos al modelo: 
+
+a). campo de fecha:
+```
+date = models.DateTimeField(auto_now=True)
+```
+b). Campo de imagen:
+```
+imageproj = models.FileField(upload_to='proyectos/',null=True,)
+```
+En el archivo settings configuro la carpeta "/media"
+```
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+```
+En el file "ulrs.py" del proyecto agregar.
+```
+from django.urls import re_path
+from django.views.static import serve
+
+urlpatterns = [
++ re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT})
+]
+```
+Y en el template
+```
+<img class="img-fluid" src="{{p.imageproj.url}}" alt="..." />
+```
+
 16. **[[ ENTENDIMIENTO DE QUE ES JINJA2 ]]**
 
 
@@ -361,9 +409,8 @@ def proyectos(request):
             tmessage = request.POST["message"]
             obj_contact = Contacto(name=tname,email=temail,phone=tphone,message=tmessage)
             obj_contact.save()
-            #return HttpResponse("EL registro fue ingresado")
+            #return HttpResponse("El registro fue ingresado")
             return render(request,"pages/gracias.html",)
-        #mis_proyectos = Proyecto.objects.all()
         return render(request,"pages/contacto.html",)
     ```    
 
@@ -383,7 +430,7 @@ def proyectos(request):
     ``` 
     - Los campos deben tener la etiquea name=<name>
 
-s
+
 
 
 #### Resources.
